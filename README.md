@@ -30,6 +30,8 @@ Users can customize password length and choose whether to include numbers and sp
 
 ```
 
+[![Live](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge)](https://securepassword-2.onrender.com/)
+
 ---
 
 ## 🚀 Features
