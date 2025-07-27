@@ -10,7 +10,7 @@ function App() {
 
   const generatePassword = async () => {
     try {
-      const response = await axios.post("http://127.0.0.1:8000/generate", {
+      const response = await axios.post("https://securepassword-1.onrender.com/generate-password", {
         minLength,
         numbers,
         specialCharacters,

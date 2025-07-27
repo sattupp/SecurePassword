@@ -1,4 +1,3 @@
-# backend/main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,10 +6,11 @@ import string
 
 app = FastAPI()
 
-# CORS for React frontend
+# CORS: Allow requests from your frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Use specific origin in production
+    allow_origins=["https://securepassword-2.onrender.com"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -20,7 +20,7 @@ class PasswordRequest(BaseModel):
     numbers: bool = True
     specialCharacters: bool = True
 
-@app.post("/generate")
+@app.post("/generate-password")
 def generate_password(req: PasswordRequest):
     letters = string.ascii_letters
     digits = string.digits
@@ -31,6 +31,9 @@ def generate_password(req: PasswordRequest):
         characters += digits
     if req.specialCharacters:
         characters += special_chars
+
+    if req.minLength < 1 or not characters:
+        return {"error": "Invalid request parameters."}
 
     pwd = ""
     meet_criteria = False
